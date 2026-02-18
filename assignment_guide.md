@@ -1,15 +1,20 @@
 # Figure 8 HomeR
 
-Imagine the scenario that an air-borne robot and a ground robot is cooperatively tracking a moving object on the ground.
-Both robots are equipped with sensors to detect the target.
-To maximize the detection range, these sensors are extended out from the robots' bodies.
-In robotics systems, we can attach frames to the robots' bodies, to the target, to the sensors, to the Earth, etc.. 
-All these frames are coordinated with each other in a tree structure, a.k.a. the transform tree.
-So that the spatial relationship among the participants can be represented by geometry.
+## Overview
+Imagine the scenario that an aerial drone and a ground rover are tracking a shared target.
+The success of such a cooperative mission depends on a unified understanding of space.
+Each participant sees the world from their own perspective:
+- The Drone sees the target relative to its downward-facing camera.
+- The Rover sees the target relative to its extended sensor mast.
+- The Mission Controller needs to know where both are relative to a fixed map or the Earth.
 
-tf2 (Transform Version 2) is the standard ROS 2 library used to track these relationships. 
-It allows you to manage multiple coordinate frames over time and answer the fundamental question: “**What is the pose of object A in the coordinate system of frame B?**”
+We can "attach" coordinate frames to the robots' bodies, to the target, to the sensors, to the Earth, etc. to "translate" between these perspectives.
+Without doing so, the robots cannot share data effectively.
+This is where tf2 (Transform Version 2, the standard ROS 2 library) comes in.
 
+In ROS 2, coordinate frames are organized into a tree structure. Every frame has one "parent" and can have multiple "children".
+By following the "branches" of this tree, tf2 can mathematically chain transforms together. 
+It allows us to manage multiple coordinate frames over time and answer the fundamental question: “**What is the pose of object A in the coordinate system of frame B?**” (e.g. What is the target's position relative to the rover).
 
 
 ## Objectives
