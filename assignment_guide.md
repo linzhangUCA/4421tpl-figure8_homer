@@ -8,21 +8,18 @@ Each participant sees the world from their own perspective:
 - The Rover sees the target relative to its extended sensor mast.
 - The Mission Controller needs to know where both are relative to a fixed map or the Earth.
 
-We can "attach" coordinate frames to the robots' bodies, to the target, to the sensors, to the Earth, etc. to "translate" between these perspectives.
-Without doing so, the robots cannot share data effectively.
-This is where tf2 (Transform Version 2, the standard ROS 2 library) comes in.
+We can "attach" coordinate frames to the robots' bodies, to the target, to the sensors, to the Earth, etc. to easily "translate" between these perspectives.
+This is where `tf2` (a.k.a. Transform Version 2) comes in.
 
 In ROS 2, coordinate frames are organized into a tree structure. Every frame has one "parent" and can have multiple "children".
-By following the "branches" of this tree, tf2 can mathematically chain transforms together. 
+By following the "branches" of this tree, `tf2` can mathematically chain transforms together. 
 It allows us to manage multiple coordinate frames over time and answer the fundamental question: “**What is the pose of object A in the coordinate system of frame B?**” (e.g. What is the target's position relative to the rover).
 
-
-## Objectives
-- Practice [transformation broadcasting](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Broadcaster-Py.html)
-- Review ROS [node](https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html)
-- Review ROS [topic](https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html).
-- Review ROS [package](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html) and [executable](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html).
-
+In this assignment, we will practice frame transforms using `tf2` by achieving the following goals:
+1. Setup a (fixed) global frame: `odom` and a body frame attached to HomeR: `base_link`.
+2. Broadcast `base_link`'s position and orientation relative to `odom` frame, given the measure velocity of HomeR.
+3. Feed HomeR's measured velocity as the input velocity commands to simulate HomeR's motion using `turtlesim`. 
+ 
 ## Pre-requisite
 - Setup motor control interface on the Pico board.
 So, the Pico is 
