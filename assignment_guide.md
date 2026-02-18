@@ -1,4 +1,17 @@
-# ROS Odometry
+# Figure 8 HomeR
+
+Imagine the scenario that an air-borne robot and a ground robot is cooperatively tracking a moving object on the ground.
+Both robots are equipped with sensors to detect the target.
+To maximize the detection range, these sensors are extended out from the robots' bodies.
+In robotics systems, we can attach frames to the robots' bodies, to the target, to the sensors, to the Earth, etc.. 
+All these frames are coordinated with each other in a tree structure, a.k.a. the transform tree.
+So that the spatial relationship among the participants can be represented by geometry.
+
+tf2 (Transform Version 2) is the standard ROS 2 library used to track these relationships. 
+It allows you to manage multiple coordinate frames over time and answer the fundamental question: “**What is the pose of object A in the coordinate system of frame B?**”
+
+
+
 ## Objectives
 - Practice [transformation broadcasting](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Broadcaster-Py.html)
 - Review ROS [node](https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html)
