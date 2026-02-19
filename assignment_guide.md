@@ -33,12 +33,17 @@ If you are running out of time, HomeR's [hardware interface node](https://github
 
 ### 3.1. Broadcast transform
 - Listen to Pico for measured linear and angular velocity of the robot.
-- Publish proper message to a right topic so that the simulated turtle will be driven by the robot's measured velocity.
+- Publish proper message to the right topic so that the simulated turtle will be driven by the robot's measured velocity.
 - Subscribe to a `Twist` message topic (e.g. `/cmd_vel`) and transmit `linear.x` and `angular.y` data as the robot's referenced linear and angular velocity to Pico.
 - Compute `base_link` frame's position and orientation relative to the `odom` frame.
 Broadcast the tansform of the frames at the frequency of 20 Hz.
 
 ### 3.2. Drive HomeR in Figure 8s.
+- Create a publisher running at 20 Hz, publish `Twist` message to the right topic to drive HomeR make a Figure 8 pattern.
+- The robot needs to travel the top and bottom circles at different directions, but maintain its angular speed at $\pi/4$ rad/s.
+  - The ideal top circle is with radius of 1 meter, and the robot should be travelling **counter-clockwise** on it.  
+  - The ideal bottom circle is with radius of 2 meters, and the robot should be travelling **clockwise** on it.
+
 ### 3.3. Configure package
 - Fill the `<description>`, `<maintainer>`, `<maintainer_email>` fields with your own information in [package.xml](homer8_odom_pkg/package.xml) and [setup.py](homer8_odom_pkg/setup.py).
 Look for the fields marked with `TODO` in these files.
