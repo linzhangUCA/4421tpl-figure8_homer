@@ -79,7 +79,7 @@ Upload the graph to the repository and
 - Create a package to host all your executables and make sure `ros2 run <package_name> <executable_name>` command is available after the package is built.
 - (10% Bonus) Use one `ros2 launch <package_name> <launch_file_name>` command to launch everything  
 
-### 3.4. (20% BONUS) Ground Demonstration
+### 3.4. (50% BONUS) Ground Demonstration
 You can request a live demo to showoff your robot "painting" 8️⃣ figures on the ground.
 
 The simulated turtle is supposed to paint a perfect 8️⃣ figure, but you'll observe the deviance between theory and reality.
