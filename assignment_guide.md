@@ -35,7 +35,7 @@ ros2 run <homer8_package> <tf_bc_node>
 ```
 3. Start robot driving node
 ```console
-ros2 run <homer8_package> <tf_bc_node> 
+ros2 run <homer8_package> <driver_node> 
 ```
 
 > [!NOTE]
