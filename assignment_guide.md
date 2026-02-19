@@ -41,7 +41,7 @@ ros2 run <homer8_package> <driver_node>
 > [!NOTE]
 > The commands wrapped in `<>` are customizable.
 
-### 2.2 Resources
+### 2.2 Preparation
 - Have HomeR or your favorite ground robot [assembled](https://linzhanguca.github.io/homer_docs/mechanical/assembly/).
 - Let the [Pico Messenger](https://github.com/linzhanguca/homer_pico) running at the background on Pico.
 So that HomeR's linear and angular velocity can be set and measured from a Raspberry Pi.
@@ -52,21 +52,22 @@ If you are running out of time, HomeR's [hardware interface node](https://github
 
 ## 3. Requirements: 
 
-### 3.1. (60%) Broadcast transform
-- Listen to Pico for measured linear and angular velocity of the robot.
-- Publish proper message to the right topic so that the simulated turtle will be driven by the robot's measured velocity.
-- Subscribe to a `Twist` message topic (e.g. `/cmd_vel`) and transmit `linear.x` and `angular.y` data as the robot's referenced linear and angular velocity to Pico.
-- Compute `base_link` frame's position and orientation relative to the `odom` frame.
+### 3.1. (50%) Broadcast transform
+- (5%) Listen to Pico for measured linear and angular velocity of the robot.
+- (15%) Publish proper message to the right topic so that the simulated turtle will be driven by the robot's measured velocity.
+- (15%) Subscribe to a `Twist` message topic (e.g. `/cmd_vel` from the driver node or `teleop_twist_keyboard`) and transmit `linear.x` and `angular.y` data as the robot's referenced linear and angular velocity to Pico.
+- (10%) Compute `base_link` frame's position and orientation relative to the `odom` frame.
 Broadcast the tansform of the frames at the frequency of 20 Hz.
-- Illustrate the relationship between `odom` frame and `base_link` frame in a transform tree graph.
+- (5%) Illustrate the relationship between `odom` frame and `base_link` frame in a transform tree graph.
 Upload the graph to the repository and  
 
 > [!TIP]
-> You can add "TF" in `rviz2` to visualize the transform.
+> - You can add "TF" in `rviz2` to visualize the transform.
+> - You can test tf broadcasting by driving the robot using the keyboard or gamepad.
  
 ### 3.2. (30%) Drive HomeR in Figure 8s.
-- Create a publisher running at 20 Hz, publish `Twist` message to the right topic to drive the robot making the Figure 8 pattern.
-- The robot needs to traverse two circles at opposite directions, but maintain its angular speed at $\pi/4$ rad/s.
+- (10%) Create a publisher running at 20 Hz, publish `Twist` message to the right topic to drive the robot making the Figure 8 pattern.
+- (20%) The robot needs to traverse two circles at opposite directions, but maintain its angular speed at $\pi/4$ rad/s.
   - The ideal smaller circle is with radius of 1 meter.  
   - The ideal bottom circle is with radius of 2 meters, and the robot should be travelling in opposite direction on it.
 
@@ -74,7 +75,7 @@ Upload the graph to the repository and
 > - Refer to [Assignment 2](https://classroom.github.com/a/a4Gqehwo).
 > - You can either stuff the figure 8 driving to the transform broadcasting node, or create a separate node for it.
 
-### 3.3. (10%) Construct package
+### 3.3. (20%) Construct package
 - Create a package to host all your executables and make sure `ros2 run <package_name> <executable_name>` command is available after the package is built.
 - (10% Bonus) Use one `ros2 launch <package_name> <launch_file_name>` command to launch everything  
 
