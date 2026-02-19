@@ -30,21 +30,24 @@ Attach `export ROS_DOMAIN_ID=<numer>` to the end of `~/.bashrc` file **on both c
 If you are running out of time, HomeR's [hardware interface node](https://github.com/linzhangUCA/homer_bringup/blob/main/homer_bringup/homer_interface.py) is the goto.
 
 ## 3. Requirements: 
-### 3.1. Develop an odometry broadcaster node as an exacutable
-### 3.2. Develop a turtle driving node as an executable
-### 3.3. Configure a package
-3. (5%) Fill the `<description>`, `<maintainer>`, `<maintainer_email>` fields with your own information in [package.xml](homer8_odom_pkg/package.xml) and [setup.py](homer8_odom_pkg/setup.py).
+
+### 3.1. Broadcast transform
+- Listen to Pico for measured linear and angular velocity of the robot.
+- Publish proper message to a right topic so that the simulated turtle will be driven by the robot's measured velocity.
+- Subscribe to a `Twist` message topic (e.g. `/cmd_vel`) and transmit `linear.x` and `angular.y` data as the robot's referenced linear and angular velocity to Pico.
+- Compute `base_link` frame's position and orientation relative to the `odom` frame.
+Broadcast the tansform of the frames at the frequency of 20 Hz.
+
+### 3.2. Drive HomeR in Figure 8s.
+### 3.3. Configure package
+- Fill the `<description>`, `<maintainer>`, `<maintainer_email>` fields with your own information in [package.xml](homer8_odom_pkg/package.xml) and [setup.py](homer8_odom_pkg/setup.py).
 Look for the fields marked with `TODO` in these files.
-
-
+- Illustrate the relationship between `odom` frame and `base_link` frame in a transform tree graph. 
+  
+### 3.4. Demonstration
+The robot is supposed to paint a figure 8 on its movable plane, but you'll observe the deviance between theory and reality.
 ![homer8_demo](/images/homer8_demo.gif)
 
-The robot is supposed to paint a figure 8 on its movable plane, but you'll observe the deviance between theory and reality.
-
-
-## Turtle and Frames
-
-![homer8_screenshot](images/odom_screenshot.png)
 
 ## AI Policies
 Please acknowledge AI's contributions according to the policies in the [syllabus](https://linzhanguca.github.io/_docs/robotics2-2025/syllabus.pdf).
