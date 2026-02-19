@@ -57,13 +57,14 @@ If you are running out of time, HomeR's [hardware interface node](https://github
 ## 3. Requirements: 
 
 ### 3.1. (50%) Broadcast transform
-- (5%) Listen to Pico for measured linear and angular velocity of the robot.
-- (15%) Publish proper message to the right topic so that the simulated turtle will be driven by the robot's measured velocity.
-- (15%) Subscribe to a `Twist` message topic (e.g. `/cmd_vel` from the driver node or `teleop_twist_keyboard`) and transmit `linear.x` and `angular.y` data as the robot's referenced linear and angular velocity to Pico.
+- (20%) Listen to Pico for measured linear and angular velocity of the robot.
+Whenever the Raspberry Pi received the measured velocities, publish them to the proper topic to drive the simulated turtle.
+- (15%) Subscribe to a `Twist` message topic (e.g. `/cmd_vel` from the driver node or `teleop_twist_keyboard`).
+send `linear.x` and `angular.z` data as the robot's reference velocity command to Pico.
 - (10%) Compute `base_link` frame's position and orientation relative to the `odom` frame.
 Broadcast the tansform of the frames at the frequency of 20 Hz.
 - (5%) Illustrate the relationship between `odom` frame and `base_link` frame in a transform tree graph.
-Upload the graph to the repository and  
+Upload the graph to the repository and display it in [README](README.md)
 
 > [!TIP]
 > - You can add "TF" in `rviz2` to visualize the transform.
@@ -88,4 +89,4 @@ You can request a live demo to showoff your robot "painting" 8️⃣ figures on 
 
 
 ## AI Policies
-Please acknowledge AI's contributions according to the policies in the [syllabus](https://linzhanguca.github.io/_docs/robotics2-2025/syllabus.pdf).
+Please acknowledge AI's contributions according to the policies in the syllabus.
