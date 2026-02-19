@@ -19,7 +19,10 @@ In this assignment, we will practice frame transforms using `tf2` by achieving t
 1. Setup a (fixed) global frame: `odom` and a body frame attached to HomeR: `base_link`.
 2. Broadcast `base_link`'s position and orientation relative to `odom` frame, given the measure velocity of HomeR.
 3. Feed HomeR's measured velocity as the input velocity commands to simulate HomeR's motion using `turtlesim`. 
- 
+
+![homer8_demo](/images/homer8_demo.gif)
+
+
 ## 2. Get Started
 To simulate a physical robot's movement, we can measure the velocity of the robot using on-board sensors (e.g. encoders).
 Then feed the measured velocity as the target/reference velocity command for the differential drive turtle from the `turtlesim_node`.
@@ -49,6 +52,7 @@ So that HomeR's linear and angular velocity can be set and measured from a Raspb
 Attach `export ROS_DOMAIN_ID=<numer>` to the end of `~/.bashrc` file **on both computers**, then `source ~/.bashrc`.
 - Review the trajectory calculation from robotics 1's [slides](https://linzhanguca.github.io/_docs/robotics1-2025/1014/kinematics.pdf).
 If you are running out of time, HomeR's [hardware interface node](https://github.com/linzhangUCA/homer_bringup/blob/main/homer_bringup/homer_interface.py) is the goto.
+
 
 ## 3. Requirements: 
 
@@ -81,11 +85,6 @@ Upload the graph to the repository and
 
 ### 3.4. (50% BONUS) Ground Demonstration
 You can request a live demo to showoff your robot "painting" 8️⃣ figures on the ground.
-
-The simulated turtle is supposed to paint a perfect 8️⃣ figure, but you'll observe the deviance between theory and reality.
-See an example below.
-
-![homer8_demo](/images/homer8_demo.gif)
 
 
 ## AI Policies
