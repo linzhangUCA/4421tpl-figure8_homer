@@ -28,15 +28,15 @@ To simulate a physical robot's movement, we can measure the velocity of the robo
 Then feed the measured velocity as the target/reference velocity command for the differential drive turtle from the `turtlesim_node`.
 
 ### 2.1. Reference Workflow
-1. Open a terminal and start `turtlesim_node`
+1. Open a terminal and start `turtlesim_node`.
 ```console
 ros2 run turtlesim turtlesim_node
 ```
-2. Start transform broadcasting node
+2. Start transform broadcasting node in another terminal.
 ```console
 ros2 run <homer8_package> <tf_bc_node> 
 ```
-3. Start robot driving node
+3. (Optional) Start robot driving node in the third terminal.
 ```console
 ros2 run <homer8_package> <driver_node> 
 ```
