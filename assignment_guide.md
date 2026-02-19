@@ -20,8 +20,29 @@ In this assignment, we will practice frame transforms using `tf2` by achieving t
 2. Broadcast `base_link`'s position and orientation relative to `odom` frame, given the measure velocity of HomeR.
 3. Feed HomeR's measured velocity as the input velocity commands to simulate HomeR's motion using `turtlesim`. 
  
-## 2 Get Started
-- Have HomeR or your favorite ground robot assembled.
+## 2. Get Started
+To simulate a physical robot's movement, we can measure the velocity of the robot using on-board sensors (e.g. encoders).
+Then feed the measured velocity as the target/reference velocity command for the differential drive turtle from the `turtlesim_node`.
+
+### 2.1. Reference Workflow
+1. Open a terminal and start `turtlesim_node`
+```console
+ros2 run turtlesim turtlesim_node
+```
+2. Start transform broadcasting node
+```console
+ros2 run <homer8_package> <tf_bc_node> 
+```
+3. Start robot driving node
+```console
+ros2 run <homer8_package> <tf_bc_node> 
+```
+
+> [!NOTE]
+> The commands wrapped in `<>` are customizable.
+
+### 2.2 Resources
+- Have HomeR or your favorite ground robot [assembled](https://linzhanguca.github.io/homer_docs/mechanical/assembly/).
 - Let the [Pico Messenger](https://github.com/linzhanguca/homer_pico) running at the background on Pico.
 So that HomeR's linear and angular velocity can be set and measured from a Raspberry Pi.
 - If `turtlesim_node` is running on a different computer other than Raspberry Pi, make sure `ROS_DOMAIN_ID` on these computers are the same.
@@ -31,26 +52,38 @@ If you are running out of time, HomeR's [hardware interface node](https://github
 
 ## 3. Requirements: 
 
-### 3.1. Broadcast transform
+### 3.1. (60%) Broadcast transform
 - Listen to Pico for measured linear and angular velocity of the robot.
 - Publish proper message to the right topic so that the simulated turtle will be driven by the robot's measured velocity.
 - Subscribe to a `Twist` message topic (e.g. `/cmd_vel`) and transmit `linear.x` and `angular.y` data as the robot's referenced linear and angular velocity to Pico.
 - Compute `base_link` frame's position and orientation relative to the `odom` frame.
 Broadcast the tansform of the frames at the frequency of 20 Hz.
+- Illustrate the relationship between `odom` frame and `base_link` frame in a transform tree graph.
+Upload the graph to the repository and  
 
-### 3.2. Drive HomeR in Figure 8s.
-- Create a publisher running at 20 Hz, publish `Twist` message to the right topic to drive HomeR make a Figure 8 pattern.
-- The robot needs to travel the top and bottom circles at different directions, but maintain its angular speed at $\pi/4$ rad/s.
-  - The ideal top circle is with radius of 1 meter, and the robot should be travelling **counter-clockwise** on it.  
-  - The ideal bottom circle is with radius of 2 meters, and the robot should be travelling **clockwise** on it.
+> [!TIP]
+> You can add "TF" in `rviz2` to visualize the transform.
+ 
+### 3.2. (30%) Drive HomeR in Figure 8s.
+- Create a publisher running at 20 Hz, publish `Twist` message to the right topic to drive the robot making the Figure 8 pattern.
+- The robot needs to traverse two circles at opposite directions, but maintain its angular speed at $\pi/4$ rad/s.
+  - The ideal smaller circle is with radius of 1 meter.  
+  - The ideal bottom circle is with radius of 2 meters, and the robot should be travelling in opposite direction on it.
 
-### 3.3. Configure package
-- Fill the `<description>`, `<maintainer>`, `<maintainer_email>` fields with your own information in [package.xml](homer8_odom_pkg/package.xml) and [setup.py](homer8_odom_pkg/setup.py).
-Look for the fields marked with `TODO` in these files.
-- Illustrate the relationship between `odom` frame and `base_link` frame in a transform tree graph. 
-  
-### 3.4. Demonstration
-The robot is supposed to paint a figure 8 on its movable plane, but you'll observe the deviance between theory and reality.
+> [!TIP]
+> - Refer to [Assignment 2](https://classroom.github.com/a/a4Gqehwo).
+> - You can either stuff the figure 8 driving to the transform broadcasting node, or create a separate node for it.
+
+### 3.3. (10%) Construct package
+- Create a package to host all your executables and make sure `ros2 run <package_name> <executable_name>` command is available after the package is built.
+- (10% Bonus) Use one `ros2 launch <package_name> <launch_file_name>` command to launch everything  
+
+### 3.4. (20% BONUS) Ground Demonstration
+You can request a live demo to showoff your robot "painting" 8️⃣ figures on the ground.
+
+The simulated turtle is supposed to paint a perfect 8️⃣ figure, but you'll observe the deviance between theory and reality.
+See an example below.
+
 ![homer8_demo](/images/homer8_demo.gif)
 
 
